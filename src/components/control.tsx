@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import React, {
@@ -21,10 +23,7 @@ import RemixDebug, {
   sourceMappingDecoder
 } from '@remix-project/remix-debug';
 import Collapse from 'rc-collapse';
-import { useSelector } from 'react-redux';
-import chainIDE from 'chainIDE';
-import { Locale } from '@modules/editor/actions/locale.actions';
-import { IStateTypes } from '@store/types';
+import * as chainIDE from 'chainIDE';
 import { editorService } from '@modules/editor/services/editorService';
 import tabService from '@modules/editor/services/tabService';
 import { notification } from '@modules/common/components/notification';
@@ -36,7 +35,6 @@ import styles from './control.less';
 const { Panel } = Collapse;
 
 export const Controls = () => {
-  const { language } = useSelector((state: IStateTypes) => state.language);
   const [compiledFiles, setCompiledFiles] = useState<string[]>([]);
   const [selectedFile, setSelectedFile] = useState<string>('');
   const [fileContent, setFileContent] = useState<string>('');
@@ -76,12 +74,8 @@ export const Controls = () => {
   });
 
   const documentLink = useMemo(() => {
-    if (language === Locale.ZH) {
-      return 'https://chainide.gitbook.io/chainide-chinese/4.-chainide-quan-ti-bu-ju/4.7.-cha-jian-xi-tong-mo-kuai/3.7.1-chainide-debugger';
-    } else {
-      return 'https://chainide.gitbook.io/chainide-english-1/chainide-modules/4.7-plug-in-system-module/3.7.1-chainide-debugger';
-    }
-  }, [language]);
+    return 'https://chainide.gitbook.io/chainide-chinese/4.-chainide-quan-ti-bu-ju/4.7.-cha-jian-xi-tong-mo-kuai/3.7.1-chainide-debugger';
+  }, []);
 
   const buttonState = useMemo(() => {
     return {

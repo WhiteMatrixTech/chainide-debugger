@@ -1,8 +1,8 @@
 import { Controls } from './components/control';
-import { PluginType, Plugin, PluginContext } from '@modules/extensions/types';
-import chainIDE from '@modules/extensions/client/chainIdeProxyImpl';
+import { PluginType, PluginContext } from '@chainide/types';
+import * as chainIDE from 'chainIDE';
 
-export const pluginConfig: Plugin = {
+export const pluginConfig: any = {
   activate(ctx: PluginContext) {
     const addControl = chainIDE.addControl({
       componentId: 'chainide-debugger',

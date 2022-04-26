@@ -1,0 +1,61 @@
+.controls {
+  height: 100%;
+  overflow: auto;
+  :global {
+    .rc-collapse {
+      border: none;
+      &-item {
+        border-top: 1px solid #393a3b !important;
+      }
+    }
+  }
+  .panel_item {
+    :global {
+      .rc-collapse-content {
+        background-color: #202123;
+        color: #bebbb8;
+      }
+    }
+    background-color: #202123;
+  }
+  .panel_header {
+    background-color: #202123;
+    color: #bebbb8 !important;
+    padding: 0 12px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .scroll {
+    height: 150px;
+  }
+  .opcodes {
+    height: 150px;
+    padding: 12px;
+    background-color: #202123;
+  }
+  .trace_grid {
+    display: grid;
+    row-gap: 10px;
+    grid-template-columns: 1fr;
+  }
+  .selected_trace {
+    background-color: #1f64b0;
+    color: #fff;
+  }
+  .debug_btns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    button {
+      padding: 0 8px !important;
+      min-width: auto !important;
+    }
+  }
+  .breakpoints_btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    button {
+      padding: 0 8px !important;
+      min-width: auto !important;
+    }
+  }
+}

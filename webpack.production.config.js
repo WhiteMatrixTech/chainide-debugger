@@ -72,6 +72,7 @@ module.exports = {
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
-    'office-ui-fabric-react': 'Fabric'
+    'office-ui-fabric-react': 'Fabric',
+    chainIDE: 'chainIDE'
   }
 };

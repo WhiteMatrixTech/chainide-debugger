@@ -22,7 +22,7 @@ import RemixDebug, {
 } from '@remix-project/remix-debug';
 import Collapse from 'rc-collapse';
 import { useSelector } from 'react-redux';
-import chainIDE from '@modules/extensions/client/chainIdeProxyImpl';
+import chainIDE from 'chainIDE';
 import { Locale } from '@modules/editor/actions/locale.actions';
 import { IStateTypes } from '@store/types';
 import { editorService } from '@modules/editor/services/editorService';
@@ -130,13 +130,15 @@ export const Controls = () => {
           href={documentLink}
           style={{ color: '#226FB9' }}
           target="_blank"
-          rel="noreferrer">
+          rel="noreferrer"
+        >
           Debugger
         </a>
       </div>
       <Stack
         tokens={{ childrenGap: 15 }}
-        style={{ padding: 15, paddingTop: 0 }}>
+        style={{ padding: 15, paddingTop: 0 }}
+      >
         <Dropdown
           label="Compiled File"
           onChanged={handleSelectNetwork}
@@ -158,7 +160,8 @@ export const Controls = () => {
         <PrimaryButton
           size={20}
           onClick={isDebugging ? handleStopDebug : handleStartDebug}
-          disabled={!fileContent || !hash}>
+          disabled={!fileContent || !hash}
+        >
           {isDebugging ? 'Stop Debug' : 'Start Debug'}
         </PrimaryButton>
 
@@ -222,14 +225,16 @@ export const Controls = () => {
             iconName={isActive ? 'ChevronDown' : 'ChevronRight'}
             style={{ marginRight: 4 }}
           />
-        )}>
+        )}
+      >
         {vmDebugger && (
           <>
             <Panel
               key="function"
               header="function"
               className={styles.panel_item}
-              headerClass={styles.panel_header}>
+              headerClass={styles.panel_header}
+            >
               <span className={styles.trace_grid}>{functionPanel}</span>
             </Panel>
 
@@ -237,7 +242,8 @@ export const Controls = () => {
               key="locals"
               header="Locals"
               className={styles.panel_item}
-              headerClass={styles.panel_header}>
+              headerClass={styles.panel_header}
+            >
               {solidityLocals.message && (
                 <span className={styles.trace_grid}>
                   {solidityLocals.message}
@@ -258,7 +264,8 @@ export const Controls = () => {
               key="state"
               header="State"
               className={styles.panel_item}
-              headerClass={styles.panel_header}>
+              headerClass={styles.panel_header}
+            >
               {solidityState.message && (
                 <span className={styles.trace_grid}>
                   {solidityState.message}
@@ -280,7 +287,8 @@ export const Controls = () => {
 
             <div
               className={cn(styles.trace_grid, styles.opcodes)}
-              ref={codeViewRef}>
+              ref={codeViewRef}
+            >
               <AssemblyItems
                 registerEvent={vmDebugger?.vmDebuggerLogic?.event?.register?.bind(
                   vmDebugger.vmDebuggerLogic.event
@@ -292,10 +300,12 @@ export const Controls = () => {
               key="stepDetail"
               header="Step Details"
               className={styles.panel_item}
-              headerClass={styles.panel_header}>
+              headerClass={styles.panel_header}
+            >
               <div
                 style={{ overflowWrap: 'anywhere' }}
-                className={styles.trace_grid}>
+                className={styles.trace_grid}
+              >
                 <div>vm trace step: {stepDetail['vm trace step']}</div>
                 <div>execution step: {stepDetail['execution step']}</div>
                 <div>add memory: {stepDetail['add memory']}</div>
@@ -310,7 +320,8 @@ export const Controls = () => {
               key="stack"
               header="Stack"
               className={styles.panel_item}
-              headerClass={styles.panel_header}>
+              headerClass={styles.panel_header}
+            >
               <div className={styles.trace_grid}>
                 {stack?.map((o: any, index: number) => (
                   <div key={index} style={{ wordBreak: 'break-all' }}>
@@ -324,7 +335,8 @@ export const Controls = () => {
               key="memory"
               header="Memory"
               className={styles.panel_item}
-              headerClass={styles.panel_header}>
+              headerClass={styles.panel_header}
+            >
               <div className={styles.trace_grid}>
                 {Object.keys(callMemory)?.map((o, index) => (
                   <div key={index}>
@@ -338,7 +350,8 @@ export const Controls = () => {
               key="callstack"
               header="CallStack"
               className={styles.panel_item}
-              headerClass={styles.panel_header}>
+              headerClass={styles.panel_header}
+            >
               <div className={styles.trace_grid}>
                 {callstack?.map((o: any, index: number) => (
                   <div key={index}>
@@ -352,10 +365,12 @@ export const Controls = () => {
               key="calldata"
               header="CallData"
               className={styles.panel_item}
-              headerClass={styles.panel_header}>
+              headerClass={styles.panel_header}
+            >
               <div
                 style={{ overflowWrap: 'anywhere' }}
-                className={styles.trace_grid}>
+                className={styles.trace_grid}
+              >
                 {debugData.calldata}
               </div>
             </Panel>
@@ -364,10 +379,12 @@ export const Controls = () => {
               key="globalvariables"
               header="Global Variables"
               className={styles.panel_item}
-              headerClass={styles.panel_header}>
+              headerClass={styles.panel_header}
+            >
               <div
                 style={{ overflowWrap: 'anywhere' }}
-                className={styles.trace_grid}>
+                className={styles.trace_grid}
+              >
                 {Object.keys(globals).map((item) => (
                   <div key={item}>
                     {item}: {globals[item]}
@@ -380,7 +397,8 @@ export const Controls = () => {
               key="returnValue"
               header="Return Value"
               className={styles.panel_item}
-              headerClass={styles.panel_header}>
+              headerClass={styles.panel_header}
+            >
               <div className={styles.trace_grid}>
                 {Object.keys(returnValue || {})?.map((o, index) => (
                   <div key={index}>
@@ -400,7 +418,8 @@ export const Controls = () => {
               key="storagechanges"
               header="Full Storage Changes"
               className={styles.panel_item}
-              headerClass={styles.panel_header}>
+              headerClass={styles.panel_header}
+            >
               <div className={styles.trace_grid}>
                 {Object.keys(storageChanges)?.map((o, index) => (
                   <div key={index}>
